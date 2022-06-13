@@ -24,7 +24,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     override fun onBindViewModel() = with(viewModel) {
         text.observe {
-            binding.textHome.text = it
+            it.apply(binding.textHome)
         }
     }
 }

@@ -24,7 +24,7 @@ class DashboardFragment : BaseFragment(R.layout.fragment_dashboard) {
 
     override fun onBindViewModel() = with(viewModel) {
         text.observe {
-            binding.textDashboard.text = it
+            it.apply(binding.textDashboard)
         }
     }
 }

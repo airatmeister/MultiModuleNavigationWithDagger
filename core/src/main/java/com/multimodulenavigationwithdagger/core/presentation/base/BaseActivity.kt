@@ -33,13 +33,13 @@ abstract class BaseActivity<VB: ViewBinding> : AppCompatActivity {
         super.onCreate(savedInstanceState)
         binding = initVB()
         setContentView(binding.root)
-        navigator = getNavController()
     }
 
     abstract fun onSetupLayout()
 
     override fun onStart() {
         super.onStart()
+        navigator = getNavController()
         onSetupLayout()
     }
 }

@@ -16,7 +16,7 @@ class NotificationsFragment : BaseFragment(R.layout.fragment_notifications) {
 
     override fun onBindViewModel() = with(viewModel) {
         text.observe {
-            binding.textNotifications.text = it
+            it.apply(binding.textNotifications)
         }
     }
 }
