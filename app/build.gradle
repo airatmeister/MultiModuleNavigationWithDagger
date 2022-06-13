@@ -16,10 +16,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        def date = new Date();
-        def formattedDate = date.format('dd-MM-yyyy')
-        setProperty("archivesBaseName", "KamazSettings_"+formattedDate)
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }
@@ -47,7 +43,4 @@ dependencies {
     for (item in commonDependencies.forKapt) {
         kapt item
     }
-
-    // viewModel and liveData
-    implementation lifecycle_process
 }
