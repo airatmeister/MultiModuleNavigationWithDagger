@@ -1,0 +1,53 @@
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+
+    defaultConfig {
+        applicationId "com.multimodulenavigationwithdagger"
+        versionCode 1
+        versionName "1.0"
+
+        def date = new Date();
+        def formattedDate = date.format('dd-MM-yyyy')
+        setProperty("archivesBaseName", "KamazSettings_"+formattedDate)
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
+    }
+}
+
+apply from: '../config/quality/quality.gradle'
+apply from: '../deps/deps_versions.gradle'
+apply from: '../deps/android_commons.gradle'
+
+dependencies {
+
+    implementation project(':core')
+    implementation project(':features:dashboard')
+    implementation project(':features:home')
+    implementation project(':features:notifications')
+
+    for (item in androidx) {
+        implementation item.value
+    }
+
+    for (item in commonDependencies.forImplementation) {
+        implementation item
+    }
+
+    for (item in commonDependencies.forKapt) {
+        kapt item
+    }
+
+    // viewModel and liveData
+    implementation lifecycle_process
+}
