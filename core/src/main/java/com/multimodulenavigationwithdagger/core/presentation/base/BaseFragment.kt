@@ -17,6 +17,7 @@ import dagger.android.support.AndroidSupportInjection
 import com.multimodulenavigationwithdagger.core.plugins.BasePlugin
 import com.multimodulenavigationwithdagger.core.plugins.LifecycleEvent
 import com.multimodulenavigationwithdagger.core.plugins.viewbinding.ViewBindingPlugin
+import com.multimodulenavigationwithdagger.core.presentation.Navigator
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -26,7 +27,7 @@ abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
     protected open fun provideStoreOwner(): ViewModelStoreOwner = this
-    protected lateinit var navigator: BaseActivity<*>
+    protected lateinit var navigator: Navigator
 
     private val plugins = mutableListOf<BasePlugin>()
 
@@ -41,7 +42,7 @@ abstract class BaseFragment(@LayoutRes layout: Int) : Fragment(layout) {
         super.onCreate(savedInstanceState)
         dispatchEventToPlugins(LifecycleEvent.OnCreate(savedInstanceState))
         callOperations()
-        navigator = requireActivity() as BaseActivity<*>
+        navigator = requireActivity() as Navigator
         // Timber.d("onCreate $this")
     }
 
